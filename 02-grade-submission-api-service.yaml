@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grade-submission-api
+  namespace: grade-demo
+spec:
+  selector:
+    app: grade-submission
+  ports:
+  - port: 8443
+    targetPort: https

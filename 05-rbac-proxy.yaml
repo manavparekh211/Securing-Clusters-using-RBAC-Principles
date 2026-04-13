@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: grade-service-proxy
+  namespace: grade-demo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: grade-service-proxy-role
+rules:
+- apiGroups: ["authentication.k8s.io"]
+  resources: ["tokenreviews"]
+  verbs: ["create"]
+- apiGroups: ["authorization.k8s.io"]
+  resources: ["subjectaccessreviews"]
+  verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: grade-submission-proxy-binding
+subjects:
+- kind: ServiceAccount
+  name: grade-service-proxy
+  namespace: grade-demo
+roleRef:
+  kind: ClusterRole
+  name: grade-service-proxy-role
+  apiGroup: rbac.authorization.k8s.io
