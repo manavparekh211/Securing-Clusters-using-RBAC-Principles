@@ -10,7 +10,7 @@ metadata:
   name: grade-service-account-role
 rules:
 - nonResourceURLs: ["/*"]
-  verbs: ["get", "post"]
+  verbs: ["get", "create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
